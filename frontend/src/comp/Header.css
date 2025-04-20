@@ -1,0 +1,92 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+  }
+  
+  
+  .logo-highlight {
+    color: #2a68ff;
+    font-weight: 800;
+    margin-right: 0.25rem;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-item {
+    color: #6f6f6f;
+    font-size: 1rem;
+    margin-right: 1rem;
+    transition: color 0.3s;
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .nav-item:hover {
+    color: #2a68ff;
+  }
+  
+  .theme-icon {
+    cursor: pointer;
+    margin-left: 1rem;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+  
+  .theme-icon-mobile {
+    position: absolute;
+    right: 5rem;
+    display: none;
+  }
+  
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .hamburger-line {
+    height: 3px;
+    background-color: black;
+    width: 2rem;
+  }
+  
+  .dark .hamburger-line {
+    background-color: #f1f1f1;
+  }
+  
+  @media (min-width: 640px) {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .theme-icon-mobile {
+      display: none;
+    }
+  
+    .hamburger-menu {
+      display: none;
+    }
+  }
+  
+  .dark .logo h1 {
+    color: white;
+  }
+  
+  .dark .nav-item {
+    color: #f1f1f1;
+  }
+  
+  .dark .theme-icon {
+    filter: invert(1);
+  }

@@ -1,0 +1,130 @@
+/* Jobs Container */
+.jobs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  /* Job Card */
+  .job-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    width: 250px;
+    padding: 20px;
+    margin-top: 16px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(128, 128, 128, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .job-card:hover {
+    background-color: #2a68ff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Job Card Header */
+  .job-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .job-title-location {
+    flex-grow: 1;
+  }
+  
+  .job-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
+  
+  .job-card:hover .job-title {
+    color: white;
+  }
+  
+  .job-location {
+    font-size: 0.9rem;
+    color: #8b8b8b;
+  }
+  
+  .job-card:hover .job-location {
+    color: #dadada;
+  }
+  
+  .job-time {
+    font-size: 0.9rem;
+    color: #8b8b8b;
+  }
+  
+  .job-card:hover .job-time {
+    color: #dadada;
+  }
+  
+  .time-icon {
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  
+  /* Job Card Body */
+  .job-card-body {
+    border-top: 2px solid #e0e0e0;
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+  
+  .job-description {
+    font-size: 0.9rem;
+    color: #adaaaa;
+    margin: 0;
+  }
+  
+  .job-card:hover .job-description {
+    color: white;
+  }
+  
+  .job-company {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .company-logo {
+    margin-right: 8px;
+  }
+  
+  .company-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .job-card:hover .company-name {
+    color: white;
+  }
+  
+  /* Apply Button */
+  .apply-button {
+    margin-top: 16px;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2a68ff;
+    background-color: white;
+    border: 2px solid #2a68ff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .apply-button:hover {
+    background-color: #2a68ff;
+    color: white;
+  }
