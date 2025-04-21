@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Company(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    company_id = models.AutoField(primary_key=True)
+    company_id = models.AutoField(primary_key=True)  
     description = models.TextField()
     website = models.URLField()
     companylogo = models.FileField(upload_to='company_logos/',null=True, blank=True)

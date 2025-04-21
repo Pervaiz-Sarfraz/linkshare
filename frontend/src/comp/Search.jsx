@@ -1,5 +1,4 @@
 import React from 'react'
- import "./Search.css";
 
 const Search = ({ title, setTitle, company, setCompany, location, setLocation }) => {
   const handleSearch = (e) => {
