@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import {motion,AnimatePresence } from 'framer-motion';
 import { useMessage } from '../context/MessageContext';
-import { cross } from "../assets/Images/index";
+import { cross } from "../Assets/Images/index.js";
 const flyVariants = {
   hidden: { y: -1000, opacity: 0 },
   visible: { y: 0, opacity: 1 },

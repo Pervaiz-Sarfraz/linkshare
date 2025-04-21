@@ -4,7 +4,7 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
         fields = ['company_id','name', 'description', 'website', 'companylogo']  
-        
+        read_only_fields = ['company_id']
 
 class JobSerializer(serializers.ModelSerializer):
     job_id = serializers.IntegerField(source='id', read_only=True)

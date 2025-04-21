@@ -20,18 +20,20 @@ const AddJob = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createJob({
+     const jobsuccess= await createJob({
         title,
         description,
         location,
         company_id: parseInt(companyId),
       });
-      setMessage("Job posted successfully!");
+      if (jobsuccess.status == 201) {
+     setMessage("Job posted successfully!");
       setTitle("");
       setDescription("");
       setLocation("");
       setCompanyId("");
       navigate("/");
+     }
     } catch (err) {
       console.error(err);
       setMessage("Error posting job");
@@ -47,6 +49,7 @@ const AddJob = () => {
           className="job-form-input"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
 
         <label className="job-form-label">Description:</label>
@@ -54,6 +57,7 @@ const AddJob = () => {
           className="job-form-textarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
 
         <label className="job-form-label">Location:</label>
@@ -61,6 +65,7 @@ const AddJob = () => {
           className="job-form-input"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+          required
         />
 
         <label className="job-form-label">Company:</label>

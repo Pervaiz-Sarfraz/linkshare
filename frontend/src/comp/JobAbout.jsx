@@ -1,6 +1,5 @@
 import React from "react";
 import { ValuesData } from "../constants/index";
-import "./JobAbout.css";
 
 const JobAbout = () => {
   return (
@@ -43,19 +42,6 @@ const JobAbout = () => {
             </div>
           );
         })}
-        {/* <div className="value-highlight-card">
-          <div className="highlight-left">
-            <p className="highlight-title">
-              Ready to switch a career?
-            </p>
-            <p className="highlight-subtitle">Let's Get Started!</p>
-          </div>
-          <div className="highlight-right">
-            <button className="highlight-button">
-              Get Started
-            </button>
-          </div>
-        </div> */}
       </div>
     </section>
   );

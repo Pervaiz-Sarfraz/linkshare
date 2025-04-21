@@ -1,4 +1,3 @@
-// MessageContext.js
 import { createContext, useContext, useState } from 'react';
 
 const MessageContext = createContext();

@@ -22,18 +22,19 @@ const {setMessage}= useMessage();
       formData.append("website", website);
       formData.append("description", description);
       formData.append("companylogo", companyLogo);
-      createCompany(formData);
-      setMessage("Company added!");
-      navigate("/companies");
-      location.reload();
-      setName("");
-      setLocation("");
-      setWebsite("");
-      setDescription("");
-      setCompanyLogo(null);
+      const company = await createCompany(formData);      
+      if (company.status == 201) {
+        setMessage("Company added!");
+        navigate("/companies");
+        setName("");
+        setLocation("");
+        setWebsite("");
+        setDescription("");
+        setCompanyLogo(null);        
+      }
     } catch (err) {
       console.error(err);
-      console.log("Error adding company");
+      setMessage("Error adding company");
     }
   };
 
@@ -47,15 +48,6 @@ const {setMessage}= useMessage();
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-
-        <label className="form-label">Company ID:</label>
-        <input
-          className="form-input"
-          type="number"
-          value={companyId}
-          onChange={(e) => setCompanyId(e.target.value)}
-        />
-
         <label className="form-label">Location:</label>
         <input
           className="form-input"
@@ -65,6 +57,7 @@ const {setMessage}= useMessage();
 
         <label className="form-label">Website:</label>
         <input
+        type="url"
           className="form-input"
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
@@ -86,6 +79,7 @@ const {setMessage}= useMessage();
             setCompanyLogo(e.target.files[0]);
           }}
           accept="image/*"
+          required
         />
 
         <button type="submit" className="form-button">
