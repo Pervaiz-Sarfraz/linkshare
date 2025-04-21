@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createJob, fetchCompanies } from "../functionality/Api";
+import { useMessage } from "../context/MessageContext";
 
 const AddJob = () => {
   const [title, setTitle] = useState("");
@@ -9,7 +10,7 @@ const AddJob = () => {
   const [companyId, setCompanyId] = useState("");
   const [companies, setCompanies] = useState([]);
   const navigate = useNavigate();
-
+  const { setMessage } = useMessage();
   useEffect(() => {
     fetchCompanies()
       .then((res) => setCompanies(res.data))
@@ -25,7 +26,7 @@ const AddJob = () => {
         location,
         company_id: parseInt(companyId),
       });
-      alert("Job posted successfully!");
+      setMessage("Job posted successfully!");
       setTitle("");
       setDescription("");
       setLocation("");
@@ -33,7 +34,7 @@ const AddJob = () => {
       navigate("/");
     } catch (err) {
       console.error(err);
-      alert("Error posting job");
+      setMessage("Error posting job");
     }
   };
 

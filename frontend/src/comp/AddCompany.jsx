@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createCompany } from "../functionality/Api";
 import { useNavigate } from "react-router-dom";
+import { useMessage } from "../context/MessageContext";
 
 const AddCompany = () => {
   const [name, setName] = useState("");
@@ -10,7 +11,7 @@ const AddCompany = () => {
   const [description, setDescription] = useState("");
   const [companyLogo, setCompanyLogo] = useState(null);
   const navigate = useNavigate();
-
+const {setMessage}= useMessage();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -22,8 +23,9 @@ const AddCompany = () => {
       formData.append("description", description);
       formData.append("companylogo", companyLogo);
       createCompany(formData);
-      alert("Company added!");
+      setMessage("Company added!");
       navigate("/companies");
+      location.reload();
       setName("");
       setLocation("");
       setWebsite("");
@@ -31,7 +33,7 @@ const AddCompany = () => {
       setCompanyLogo(null);
     } catch (err) {
       console.error(err);
-      alert("Error adding company");
+      console.log("Error adding company");
     }
   };
 

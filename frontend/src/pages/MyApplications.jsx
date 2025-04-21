@@ -15,7 +15,7 @@ const MyApplications = () => {
   return (
     <div>
       <h2>My Applications</h2>
-      <div className="job_list">
+      <div className="apply_list">
         {applications.map((application, index) => (
           <div key={application.application_id || `application-${index}`} className="job-card">
             <div className="job-card-header">

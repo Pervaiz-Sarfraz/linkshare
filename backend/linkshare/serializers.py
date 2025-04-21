@@ -5,10 +5,7 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = ['company_id','name', 'description', 'website', 'companylogo']  
         
-# class JobSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Job
-#         fields = ['Job_id','title', 'description', 'location', 'posted_at']
+
 class JobSerializer(serializers.ModelSerializer):
     job_id = serializers.IntegerField(source='id', read_only=True)
     company_id = serializers.PrimaryKeyRelatedField(queryset=Company.objects.all(), source='company')

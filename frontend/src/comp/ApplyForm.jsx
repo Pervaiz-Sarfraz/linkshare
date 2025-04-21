@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"; 
 import { applyToJob, getSingleJob } from "../functionality/Api";
+import { useMessage } from "../context/MessageContext";
 
 const ApplyForm = () => {
   const { id } = useParams(); 
   const [job, setJob] = useState(null); 
   const [resume, setResume] = useState(null); 
-const navigate= useNavigate();
+  const { setMessage } = useMessage();
+  const navigate= useNavigate();
   useEffect(() => {
     getSingleJob(id)
       .then((res) => setJob(res.data))
@@ -18,17 +20,17 @@ const navigate= useNavigate();
   
     const formData = new FormData();
     formData.append("job", id); 
-    formData.append("user", localStorage.getItem("username"))
+    formData.append("user", localStorage.getItem("user_id"));
     formData.append("resume", resume);
   
     try {
       await applyToJob(formData);
-      alert("Application submitted!");
+      setMessage("Application submitted!");
       navigate("/applications");
       setResume(null);
     } catch (err) {
       console.error(err);
-      alert("Error applying for job.");
+      setMessage("Error applying for job.");
     }
   };
   

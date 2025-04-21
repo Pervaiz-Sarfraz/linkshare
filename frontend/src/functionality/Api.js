@@ -1,6 +1,13 @@
 import axiosInstance from "./axiosInstance"; 
 export const fetchCompanies = () => axiosInstance.get(`/companies/`);
 export const fetchJobs = () => axiosInstance.get(`/jobs/`);
+export const searchJobs = async (filters) => {
+  const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+    if (value) params.append(key, value);
+  });
+  axiosInstance.get(`/jobs/search?${params.toString()}`);
+};
 export const fetchJobById = (id) => axiosInstance.get(`/jobs/${id}/`);
 export const createCompany = (companyData) =>
   axiosInstance.post(`/companies/`, companyData, {

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { register } from "../functionality/Api"; 
+import { useMessage } from "../context/MessageContext";
 
 function Register({ onRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { setMessage } = useMessage();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -12,7 +14,7 @@ function Register({ onRegister }) {
 
     try {
       await register(email, password); 
-      alert("Registration successful! You can now log in.");
+      setMessage("Registration successful! You can now log in.");
       onRegister(); 
     } catch (err) {
       console.error(err);
