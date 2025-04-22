@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Company, Job, Application
-from .serializers import CompanySerializer,JobSerializer,ApplicationSerializer
+from .models import Company, Job, Application,SavedJob
+from .serializers import CompanySerializer,JobSerializer,ApplicationSerializer,SavejobSerializer
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
@@ -60,3 +62,22 @@ class LoginView(APIView):
                 "email": user.email
             })
         return Response({"error": "Invalid credentials"}, status=401)
+    
+class SavedJobViewSet(viewsets.ModelViewSet):
+    serializer_class = SavejobSerializer
+    queryset = SavedJob.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return SavedJob.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        job_id = self.request.data.get('job_id')
+        job = Job.objects.get(id=job_id)
+        serializer.save(user=self.request.user, job=job)
+
+    def create(self, request, *args, **kwargs):
+        job_id = request.data.get('job_id')
+        if SavedJob.objects.filter(user=request.user, job_id=job_id).exists():
+            return Response({"detail": "Job already saved"}, status=status.HTTP_400_BAD_REQUEST)
+        return super().create(request, *args, **kwargs)

@@ -1,9 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaTrash, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
+import { FaTrash, FaMapMarkerAlt, FaBuilding, FaHeart, FaRegHeart } from "react-icons/fa";
 
-const JobDetail = ({ job, onDelete }) => {
+const JobDetail = ({ job, onDelete, isSaved, onToggleSave }) => {
   const navigate = useNavigate();
+console.log('job is there', job);
 
   const handleDelete = (e) => {
     e.stopPropagation();
@@ -17,24 +18,29 @@ const JobDetail = ({ job, onDelete }) => {
       <div className="job-card-header">
         <div className="job-card-title-row">
           <h3 className="job-title">{job.title}</h3>
-          <button className="delete-btn" onClick={handleDelete}>
-            <FaTrash />
-          </button>
+          <div className="icon-actions">
+            <button className="save-btn" onClick={() => onToggleSave(job.job_id)}>
+              {isSaved ? <FaHeart color="red" className="heart"/> : <FaRegHeart className="heart"/>}
+            </button>
+            <button className="delete-btn" onClick={handleDelete}>
+              <FaTrash />
+            </button>
+          </div>
         </div>
-        
+
         <div className="job-company">
           <FaBuilding className="icon" />
           <span>{job.company}</span>
         </div>
-        
+
         <p className="job-description">{job.description}</p>
-        
+
         <div className="job-location">
           <FaMapMarkerAlt className="icon" />
           <span>{job.location}</span>
         </div>
       </div>
-      
+
       <div className="job-card-footer">
         <button
           className="apply-button"

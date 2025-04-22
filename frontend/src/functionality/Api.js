@@ -28,3 +28,12 @@ export const getSingleJob = (jobId) =>
     axiosInstance.get(`/jobs/${jobId}/`);
   export const fetchApplication = () =>
     axiosInstance.get(`/applications`);
+  export const saveJob = (jobId) =>
+    axiosInstance.post(`/save-job/`, { job_id: jobId });
+  export const getSaveJobs = () =>
+    axiosInstance.get(`/save-job/`);
+  
+  export const unSaveJob = (savedJobId) =>
+    axiosInstance.delete(`/save-job/${savedJobId}/`);
+  
+  

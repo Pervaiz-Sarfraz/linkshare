@@ -788,14 +788,17 @@ button:hover {
   z-index: 2;
   cursor: pointer;
 }
+
 .search {
   padding: 1rem;
   background-color: #d4d7da;
   border-radius: 10px;
 }
-.dark .search{
+
+.dark .search {
   background-color: #1E293B;
 }
+
 .search-container {
   display: grid;
   gap: 1.5rem;
@@ -811,10 +814,12 @@ button:hover {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.dark .search-form{
+
+.dark .search-form {
   background-color: #1E293B;
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
+
 .search-input {
   display: flex;
   align-items: center;
@@ -836,9 +841,11 @@ button:hover {
   outline: none;
   margin-top: 0.8em;
 }
-.nav-item{
+
+.nav-item {
   list-style: none;
 }
+
 .close-icon {
   font-size: 1.2rem;
   color: #a5a6a6;
@@ -888,10 +895,12 @@ button:hover {
   background-color: white;
   color: #6f6f6f;
 }
-.dark .filter-select{
+
+.dark .filter-select {
   background-color: #1E293B;
   color: white;
 }
+
 .clear-button {
   background: none;
   border: none;
@@ -963,4 +972,19 @@ button:hover {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
+}
+
+.icon-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.save-btn{
+  background-color: transparent;
+}
+.save-btn svg {
+  color: #2a68ff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
 }

@@ -1,14 +1,14 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from linkshare.views import CompanyViewSet, JobViewSet, ApplicationViewSet,RegisterView, LoginView
+from linkshare.views import CompanyViewSet, JobViewSet, ApplicationViewSet,RegisterView, LoginView,SavedJobViewSet
 from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
 router.register(r'jobs', JobViewSet)
 router.register(r'companies', CompanyViewSet)
 router.register(r'applications', ApplicationViewSet)
-
+router.register(r'save-job', SavedJobViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('register/', RegisterView.as_view(), name='register'),

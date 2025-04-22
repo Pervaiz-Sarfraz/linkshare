@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Company,Job,Application
+from .models import Company,Job,Application,SavedJob
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
@@ -19,3 +19,15 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ['user', 'job', 'resume', 'applied_at']
+
+
+class SavejobSerializer(serializers.ModelSerializer):
+    job_title = serializers.SerializerMethodField()
+    job_id = serializers.PrimaryKeyRelatedField(source='job', read_only=True)
+
+    class Meta:
+        model = SavedJob
+        fields = ['id', 'job_id', 'job_title', 'saved_at']
+
+    def get_job_title(self, obj):
+        return obj.job.title

@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { fetchJobs, deleteJob } from "../functionality/Api";
+import { fetchJobs, deleteJob, saveJob, getSaveJobs, unSaveJob } from "../functionality/Api";
 import JobCard from "./JobDetail";
-import Search from "../comp/Search"; 
+import Search from "../comp/Search";
+import { useMessage } from "../context/MessageContext";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  
+  const [savedJobs, setSavedJobs] = useState([]);
+
   const [title, setTitle] = useState("");
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
+  const { setMessage } = useMessage();
 
   useEffect(() => {
-    fetchJobs()
-      .then((res) => {
-        setJobs(res.data);
-        setFilteredJobs(res.data);
-      })
-      .catch((err) => console.error("Error fetching jobs", err));
+    const fetchAll = async () => {
+      try {
+        const jobsRes = await fetchJobs();
+        setJobs(jobsRes.data);
+        setFilteredJobs(jobsRes.data);
+
+        const savedRes = await getSaveJobs();
+        console.log('savedRes', savedRes);
+        
+        const savedJobIds = savedRes.data.map((job) => job.job_id); 
+        setSavedJobs(savedJobIds);
+      } catch (err) {
+        console.error("Error fetching jobs or saved jobs", err);
+      }
+    };
+
+    fetchAll();
   }, []);
 
   useEffect(() => {
@@ -40,10 +54,35 @@ const JobList = () => {
     try {
       await deleteJob(jobId);
       setJobs((prev) => prev.filter((job) => job.job_id !== jobId));
+      setSavedJobs((prev) => prev.filter((id) => id !== jobId)); 
     } catch (err) {
       console.error("Error deleting job", err);
     }
   };
+
+  const handleToggleSave = async (jobId) => {
+    try {
+      if (savedJobs.includes(jobId)) {
+        const savedRes = await getSaveJobs();
+        const savedJob = savedRes.data.find((j) => j.job_id === jobId);
+        if (savedJob) {
+          await unSaveJob(savedJob.id);
+          setSavedJobs((prev) => prev.filter((id) => id !== jobId));
+          setMessage("Job removed from saved list.");
+        }
+      } else {
+        await saveJob(jobId);
+  
+        setSavedJobs((prev) => [...prev, jobId]);
+        setMessage("Job saved successfully.");
+        
+      }
+    } catch (err) {
+      console.error("Error toggling saved job", err);
+      setMessage("Failed to save the job. Please try again.");
+    }
+  };
+  
 
   return (
     <div>
@@ -55,13 +94,19 @@ const JobList = () => {
         location={location}
         setLocation={setLocation}
       />
-      <h2>Available Jobs({jobs.length})</h2>
+      <h2>Available Jobs ({filteredJobs.length})</h2>
       <div className="job-list">
         {filteredJobs.length === 0 ? (
           <p>No jobs match your search.</p>
         ) : (
           filteredJobs.map((job) => (
-            <JobCard key={job.job_id} job={job} onDelete={handleDelete} />
+            <JobCard
+              key={job.job_id}
+              job={job}
+              onDelete={handleDelete}
+              isSaved={savedJobs.includes(job.job_id)}
+              onToggleSave={handleToggleSave}
+            />
           ))
         )}
       </div>

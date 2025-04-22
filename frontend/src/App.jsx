@@ -16,24 +16,29 @@ import JobAbout from "./comp/JobAbout";
 import Footer from "./comp/Footer";
 import Message from './comp/Message';
 import Loader from "./comp/Loader";
+import SavedJob from "./pages/SavedJobs";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("access"));
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const checkAuthStatus = () => {
       const hasToken = !!localStorage.getItem("access");
       setIsLoggedIn(hasToken);
       setIsLoading(false);
-    }, 1000); 
 
+    };
+
+    const timer = setTimeout(checkAuthStatus, 1000);
+    
     return () => clearTimeout(timer);
-  }, []);
+  }, []); 
 
   if (isLoading) {
     return <Loader />;
   }
+
   return (
     <Router>
       <Message />
@@ -72,6 +77,7 @@ function App() {
             <Route path="/applications" element={<MyApplications />} />
             <Route path="/jobs/:id/apply" element={<ApplyPage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/saved" element={<SavedJob />} />
           </Routes>
           <Footer />
         </>
