@@ -7,19 +7,33 @@ import AddJobPage from "./pages/AddJobPage";
 import ApplyPage from "./pages/ApplyPage";
 import Search from "./comp/Search";
 import Header from "./comp/Header";
-import Login from "./pages/Login"; 
-import Register from "./pages/Register"; 
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Job from "./pages/Job";
 import Company from "./pages/Company";
 import MyApplications from "./pages/MyApplications";
 import JobAbout from "./comp/JobAbout";
 import Footer from "./comp/Footer";
 import Message from './comp/Message';
-
+import Loader from "./comp/Loader";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("access"));
   const [isRegistering, setIsRegistering] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const hasToken = !!localStorage.getItem("access");
+      setIsLoggedIn(hasToken);
+      setIsLoading(false);
+    }, 1000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <Router>
       <Message />
