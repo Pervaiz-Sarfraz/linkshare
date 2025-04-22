@@ -3,8 +3,8 @@ from .models import Company,Job,Application
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
-        fields = ['company_id','name', 'description', 'website', 'companylogo']  
-        
+        fields = ['company_id','name', 'description', 'website', 'location','companylogo']  
+        read_only_fields = ['company_id']
 
 class JobSerializer(serializers.ModelSerializer):
     job_id = serializers.IntegerField(source='id', read_only=True)
