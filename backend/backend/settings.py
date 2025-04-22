@@ -7,8 +7,8 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-_phdrg_sopx$lwh092kjk=c7ht@aie=eze1ls&%7sr#p_xn2$g'
-DEBUG = True
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
 
@@ -58,8 +58,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'api.wsgi.app'
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
