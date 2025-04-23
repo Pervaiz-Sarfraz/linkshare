@@ -11,7 +11,7 @@ function SavedJobs() {
         const fetchSavedJobs = async () => {
             try {
                 const savedRes = await getSaveJobs();
-                setSavedJobs(savedRes.data); // Assuming this returns array of job objects
+                setSavedJobs(savedRes.data); 
             } catch (err) {
                 console.error("Failed to fetch saved jobs", err);
                 setMessage("Failed to load saved jobs");
@@ -37,7 +37,6 @@ function SavedJobs() {
             const isCurrentlySaved = savedJobs.some(job => job.job_id === jobId);
             
             if (isCurrentlySaved) {
-                // Find the saved job entry to get its ID
                 const savedJob = savedJobs.find(job => job.job_id === jobId);
                 if (savedJob) {
                     await unSaveJob(savedJob.id);
@@ -46,7 +45,6 @@ function SavedJobs() {
                 }
             } else {
                 await saveJob(jobId);
-                // You might want to fetch the updated list here or optimistically update
                 const savedRes = await getSaveJobs();
                 setSavedJobs(savedRes.data);
                 setMessage("Job saved successfully");

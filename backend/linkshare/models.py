@@ -39,5 +39,3 @@ class SavedJob(models.Model):
 
     def __str__(self):
             return f"{self.user.username} saved job '{self.job.title}' at '{self.job.company.name}' located in '{self.job.location}'"
-        # return f"{self.user.username} saved {self.job.title,self.job.company,self.job.description,self.job.location}"
-        #    return f"{self.user.username} saved job '{self.job.title}' at '{self.job.company}' located in '{self.job.location}'"

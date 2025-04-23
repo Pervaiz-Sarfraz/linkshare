@@ -44,25 +44,4 @@ class SavejobSerializer(serializers.ModelSerializer):
     def get_job_location(self, obj):
         return obj.job.location if obj.job else None
 
-    
-
-
-
-
-    # nest one
-
-
-
-#     class JobSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Job
-#         fields = ['id', 'title', 'company', 'description', 'location']
-
-# class SavejobSerializer(serializers.ModelSerializer):
-#     job = JobSerializer(read_only=True)
-
-#     class Meta:
-#         model = SavedJob
-#         fields = ['id', 'job', 'saved_at']
-
 
