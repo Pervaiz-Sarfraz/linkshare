@@ -1,3 +1,6 @@
+html, body {
+  height: 100%;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -587,14 +590,15 @@ button:hover {
 }
 
 .site-footer {
+  flex-shrink: 0; /* Prevent footer from shrinking */
   background-color: #2c3e50;
   color: #ecf0f1;
   padding: 40px 0 0;
   font-family: 'Poppins', sans-serif;
-  margin-top: auto;
   width: 100%;
 }
 
+/* Keep all your existing footer styles below */
 .footer-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(23.15vw, 1fr));

@@ -67,6 +67,7 @@ function App() {
       ) : (
         <>
           <Header />
+          <div className="main-content">
           <Routes>
             <Route path="/" element={<><JobList /><JobAbout /></>} />
             <Route path="/jobs/:id" element={<JobDetail />} />
@@ -79,6 +80,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/saved" element={<SavedJob />} />
           </Routes>
+          </div>
           <Footer />
         </>
       )}

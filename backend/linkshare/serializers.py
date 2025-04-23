@@ -23,11 +23,46 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
 class SavejobSerializer(serializers.ModelSerializer):
     job_title = serializers.SerializerMethodField()
+    job_company = serializers.SerializerMethodField()
+    job_description = serializers.SerializerMethodField()
+    job_location = serializers.SerializerMethodField()
     job_id = serializers.PrimaryKeyRelatedField(source='job', read_only=True)
 
     class Meta:
         model = SavedJob
-        fields = ['id', 'job_id', 'job_title', 'saved_at']
+        fields = ['id', 'job_id', 'job_title', 'job_company', 'job_description', 'job_location', 'saved_at']
 
     def get_job_title(self, obj):
-        return obj.job.title
+        return obj.job.title if obj.job else None
+
+    def get_job_company(self, obj):
+        return obj.job.company.name if obj.job and obj.job.company else None
+
+    def get_job_description(self, obj):
+        return obj.job.description if obj.job else None
+
+    def get_job_location(self, obj):
+        return obj.job.location if obj.job else None
+
+    
+
+
+
+
+    # nest one
+
+
+
+#     class JobSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Job
+#         fields = ['id', 'title', 'company', 'description', 'location']
+
+# class SavejobSerializer(serializers.ModelSerializer):
+#     job = JobSerializer(read_only=True)
+
+#     class Meta:
+#         model = SavedJob
+#         fields = ['id', 'job', 'saved_at']
+
+
