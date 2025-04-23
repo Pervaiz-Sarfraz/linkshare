@@ -9,9 +9,6 @@ Add Company:
 
 ![Project Screenshot](./frontend/src/assets/demo/addcompany.png)
 
-Added companies:
-
-![Project Screenshot](./frontend/src/assets/demo/companies.png)
 
 Post Jobs using Already create company:
 
