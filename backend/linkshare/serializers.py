@@ -1,10 +1,17 @@
 from rest_framework import serializers
 from .models import Company,Job,Application,SavedJob
 class CompanySerializer(serializers.ModelSerializer):
+    companylogo = serializers.SerializerMethodField()
+
     class Meta:
         model = Company
-        fields = ['company_id','name', 'description', 'website', 'location','companylogo']  
-        read_only_fields = ['company_id']
+        fields = '__all__'
+
+    def get_companylogo(self, obj):
+        request = self.context.get('request')
+        if obj.companylogo and hasattr(obj.companylogo, 'url'):
+            return request.build_absolute_uri(obj.companylogo.url)
+        return None
 
 class JobSerializer(serializers.ModelSerializer):
     job_id = serializers.IntegerField(source='id', read_only=True)

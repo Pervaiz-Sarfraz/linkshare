@@ -15,6 +15,11 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer 
     permission_classes = [IsAuthenticatedOrReadOnly]
+    # In your view (e.g., CompanyViewSet or APIView)
+def get_serializer_context(self):
+    return {'request': self.request}
+
+    
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all().order_by('-created_at')
     serializer_class = JobSerializer
