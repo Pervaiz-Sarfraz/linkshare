@@ -61,6 +61,7 @@ WSGI_APPLICATION = 'backend.wsgi.app'
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://localhost:5174",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -98,14 +99,21 @@ CORS_ALLOW_CREDENTIALS = True
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'linkshare',
+#         'USER': 'pervaiz',
+#         'PASSWORD':'1234',
+#         'HOST': 'localhost',
+#         'PORT': 5432,
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'linkshare',
-        'USER': 'pervaiz',
-        'PASSWORD':'1234',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

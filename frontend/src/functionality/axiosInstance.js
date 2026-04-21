@@ -27,9 +27,13 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       const refresh = localStorage.getItem("refresh");
 
-      if (!refresh) {
-        localStorage.clear();
-        window.location.href = "/login";
+      const isAuthRequest = originalRequest.url.includes("/login") || originalRequest.url.includes("/register");
+
+      if (!refresh || isAuthRequest) {
+        if (!isAuthRequest) {
+          localStorage.clear();
+          window.location.href = "/login";
+        }
         return Promise.reject(error);
       }
 
